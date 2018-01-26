@@ -28,7 +28,7 @@ module powerbi.extensibility.visual {
 
     export class LineUpVisual implements IVisual {
         private readonly target: HTMLElement;
-        //private readonly colorPalette: IColorPalette;
+        private readonly colorPalette: IColorPalette;
 
         private provider: any;
         private lineup: any;
@@ -37,8 +37,9 @@ module powerbi.extensibility.visual {
 
         constructor(options: VisualConstructorOptions) {
             this.lineupLib = (<any>window).LineUpJS;
+            //options.host.createSelectionManager().
             console.log('Visual constructor', options);
-            //this._colorPalette = options.host.colorPalette;
+            this.colorPalette = options.host.colorPalette;
             this.target = options.element;
             this.target.innerHTML = '<div></div>';
         }
@@ -71,13 +72,43 @@ module powerbi.extensibility.visual {
             }
         }
 
-        private extract(_table: DataViewTable) {
-            const rows: any[] = [];
-            const cols: any[] = [];
+        private extract(table: DataViewTable) {
+            const rows = table.rows || [];
+            const colors = this.colorPalette;
+            const cols = table.columns.map((d) => {
+                const c: any = {
+                    type: 'string',
+                    label: d.displayName,
+                    column: d.index
+                };
+                if (!d.type || d.roles!.row) { // row identifer are always strings
+                    c.type = 'string';
+                } else if (d.type.bool) {
+                    c.type = 'boolean';
+                } else if (d.type.integer || d.type.numeric) {
+                    c.type = 'number';
+                    const vs = rows.map((r) => <number>r[d.index!]);
+                    c.domain = [Math.min(...vs), Math.max(...vs)];
+                } else if (d.type.dateTime) {
+                    c.type = 'date';
+                } else if (d.type.enumeration) {
+                    c.type = 'categorical';
+                    c.categories = d.type.enumeration.members().map((cat) => {
+                        return {
+                            label: cat.displayName,
+                            name: cat.value,
+                            color: colors.getColor(String(cat.value))
+                        };
+                    });
+                }
+                return c;
+            });
+
+            const sort = table.columns.filter((d) => d.sort).sort((a, b) => a.sortOrder! - b.sortOrder!).map((d) => ({asc: d.sort === SortDirection.Ascending, label: d.displayName}));
 
 
             this.lineupLib.deriveColors(cols);
-            return {rows, cols};
+            return {rows, cols, sort};
         }
 
         private static dataChanged(rows: any[], cols: any[], oldRows: any[], oldCols: any[]) {

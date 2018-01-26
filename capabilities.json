@@ -1,63 +1,17 @@
 {
     "dataRoles": [
         {
-            "displayName": "Category Data",
-            "name": "category",
+            "displayName": "Row Identifier",
+            "name": "row",
             "kind": "Grouping"
         },
         {
-            "displayName": "Measure Data",
-            "name": "measure",
+            "displayName": "Columns",
+            "name": "columns",
             "kind": "Measure"
         }
     ],
-    "objects": {
-        "dataPoint": {
-            "displayName": "Data colors",
-            "properties": {
-                "defaultColor": {
-                    "displayName": "Default color",
-                    "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
-                    }
-                },
-                "showAllDataPoints": {
-                    "displayName": "Show all",
-                    "type": {
-                        "bool": true
-                    }
-                },
-                "fill": {
-                    "displayName": "Fill",
-                    "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
-                    }
-                },
-                "fillRule": {
-                    "displayName": "Color saturation",
-                    "type": {
-                        "fill": {}
-                    }
-                },
-                 "fontSize": {
-                    "displayName": "Text Size",
-                    "type": {
-                        "formatting": {
-                            "fontSize": true
-                        }
-                    }
-                }
-            }
-        }
-    },
+    "objects": { },
     "supportsHighlight": true,
     "advancedEditModeSupport": 2,
     "sorting": {
@@ -69,8 +23,8 @@
         "table": {
           "rows": {
             "select": [
-              { "for": { "in": "category" } },
-              { "for": { "in": "measure" } }
+              { "for": { "in": "row" } },
+              { "for": { "in": "columns" } }
             ]
           }
         }
