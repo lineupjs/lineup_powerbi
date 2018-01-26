@@ -25,24 +25,32 @@
  */
 
 module powerbi.extensibility.visual {
-  "use strict";
   import DataViewObjectsParser = powerbi.extensibility.utils.dataview.DataViewObjectsParser;
 
   export class LineUpVisualSettings extends DataViewObjectsParser {
-    readonly dataPoint = new DataPointSettings();
+    readonly lineup = new LineUpSettings();
+    readonly provider = new LineUpProviderSettings();
   }
 
-  export class DataPointSettings {
-    // Default color
-    defaultColor = "";
-    // Show all
-    showAllDataPoints = true;
-    // Fill
-    fill = "";
-    // Color saturation
-    fillRule = "";
-    // Text Size
-    fontSize = 12;
+  export class LineUpProviderSettings {
+    filterGlobally: boolean;
+    maxNestedSortingCriteria: number;
+    maxGroupColumns: number;
+    multiSelection: boolean;
+  }
+
+  export class LineUpSettings {
+    overviewMode: boolean;
+    summaryHeader: boolean;
+    animated: boolean;
+    expandLineOnHover: boolean;
+    sidePanel: boolean;
+    sidePanelCollapsed: boolean;
+    defaultSlopeGraphMode: 'item' | 'band';
+    rowHeight: number;
+    rowPadding: number;
+    groupHeight: number;
+    groupPadding: number;
   }
 
 }

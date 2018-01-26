@@ -1,5 +1,3 @@
-import {LineUp, LocalDataProvider} from 'lineupjs';
-
 /*
  *  Power BI Visual CLI
  *
@@ -27,25 +25,78 @@ import {LineUp, LocalDataProvider} from 'lineupjs';
  */
 
 module powerbi.extensibility.visual {
-    "use strict";
+
     export class LineUpVisual implements IVisual {
         private readonly target: HTMLElement;
-        private readonly colorPalette: IColorPalette;
+        //private readonly colorPalette: IColorPalette;
 
-        private updateCount: number;
-        private settings: LineUpVisualSettings;
+        private provider: any;
+        private lineup: any;
+        private settings = new LineUpVisualSettings();
+        private lineupLib: any;
 
         constructor(options: VisualConstructorOptions) {
+            this.lineupLib = (<any>window).LineUpJS;
             console.log('Visual constructor', options);
-            this.colorPalette = options.host.colorPalette;
+            //this._colorPalette = options.host.colorPalette;
             this.target = options.element;
-            this.updateCount = 0;
+            this.target.innerHTML = '<div></div>';
         }
 
         update(options: VisualUpdateOptions) {
+            const oldSettings = this.settings;
             this.settings = LineUpVisual.parseSettings(options && options.dataViews && options.dataViews[0]);
-            console.log('Visual update', options);
-            this.target.innerHTML = `<p>Update count: <em>${(this.updateCount++)}</em></p>`;
+            let providerChanged = false;
+            const {rows, cols} = this.extract(options.dataViews[0].table!);
+
+            if (!this.provider || !LineUpVisual.equalObject(oldSettings.provider, this.settings.provider)) {
+                this.provider = new this.lineupLib.LocalDataProvider(rows, cols, this.settings.provider);
+                this.provider.deriveDefault();
+                providerChanged = true;
+            } else if (LineUpVisual.dataChanged(rows, cols, this.provider.data, this.provider.getColumns())) {
+                this.provider.clearColumns();
+                cols.forEach((c: any) => this.provider.pushDesc(c));
+                this.provider.setData(rows);
+                this.provider.deriveDefault();
+            }
+            if (!this.lineup || !LineUpVisual.equalObject(oldSettings.lineup, this.settings.lineup)) {
+                if (this.lineup) {
+                    this.lineup.destroy();
+                }
+                this.lineup = new this.lineupLib.LineUp(this.target.firstElementChild!, this.provider, this.settings.lineup);
+            } else if (providerChanged) {
+                this.lineup.setDataProvider(this.provider);
+            } else {
+                this.lineup.update();
+            }
+        }
+
+        private extract(_table: DataViewTable) {
+            const rows: any[] = [];
+            const cols: any[] = [];
+
+
+            this.lineupLib.deriveColors(cols);
+            return {rows, cols};
+        }
+
+        private static dataChanged(rows: any[], cols: any[], oldRows: any[], oldCols: any[]) {
+            return rows === oldRows && cols === oldCols;
+        }
+
+        private static equalObject(a: any, b: any) {
+            if (a === b) {
+                return true;
+            }
+            if (!a || !b) {
+                return false;
+            }
+            const aKeys = Object.keys(a);
+            const bKeys = Object.keys(b);
+            if (aKeys.length !== bKeys.length) {
+                return false;
+            }
+            return aKeys.every((k) => a[k] === b[k]);
         }
 
         private static parseSettings(dataView: DataView): LineUpVisualSettings {

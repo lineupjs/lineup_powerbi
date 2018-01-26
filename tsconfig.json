@@ -1,12 +1,30 @@
 {
   "compilerOptions": {
-    "allowJs": false,
+    "target": "es5",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "out": "./.tmp/build/visual.js",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "ES5",
-    "sourceMap": true,
-    "out": "./.tmp/build/visual.js"
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016.array.include",
+      "es2017.object"
+    ],
+    "removeComments": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "stripInternal": true,
+    "skipLibCheck": true
   },
+  "compileOnSave": false,
   "files": [
     ".api/v1.10.0/PowerBI-visuals.d.ts",
     "node_modules/powerbi-visuals-utils-dataviewutils/lib/index.d.ts",
