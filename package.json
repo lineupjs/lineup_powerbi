@@ -1,5 +1,5 @@
 {
-  "name": "visual",
+  "name": "lineup_powerbi",
   "dependencies": {
     "powerbi-visuals-utils-dataviewutils": "1.2.0"
   }
