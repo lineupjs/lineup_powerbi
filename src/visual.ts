@@ -26,46 +26,42 @@
 
 module powerbi.extensibility.visual {
     "use strict";
-    export class Visual implements IVisual {
-        private target: HTMLElement;
+    export class LineUpVisual implements IVisual {
+        private readonly target: HTMLElement;
+        private readonly colorPalette: IColorPalette;
+
         private updateCount: number;
-        private settings: VisualSettings;
-        private textNode: Text;
+        private settings: LineUpVisualSettings;
 
         constructor(options: VisualConstructorOptions) {
             console.log('Visual constructor', options);
+            this.colorPalette = options.host.colorPalette;
             this.target = options.element;
             this.updateCount = 0;
-            if (typeof document !== "undefined") {
-                const new_p: HTMLElement = document.createElement("p");
-                new_p.appendChild(document.createTextNode("Update count:"));
-                const new_em: HTMLElement = document.createElement("em");
-                this.textNode = document.createTextNode(this.updateCount.toString());
-                new_em.appendChild(this.textNode);
-                new_p.appendChild(new_em);
-                this.target.appendChild(new_p);
-            }
         }
 
-        public update(options: VisualUpdateOptions) {
-            this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
+        update(options: VisualUpdateOptions) {
+            this.settings = LineUpVisual.parseSettings(options && options.dataViews && options.dataViews[0]);
             console.log('Visual update', options);
-            if (typeof this.textNode !== "undefined") {
-                this.textNode.textContent = (this.updateCount++).toString();
-            }
+            this.target.innerHTML = `<p>Update count: <em>${(this.updateCount++)}</em></p>`;
         }
 
-        private static parseSettings(dataView: DataView): VisualSettings {
-            return VisualSettings.parse(dataView) as VisualSettings;
+        private static parseSettings(dataView: DataView): LineUpVisualSettings {
+            return <LineUpVisualSettings>LineUpVisualSettings.parse(dataView);
         }
 
-        /** 
-         * This function gets called for each of the objects defined in the capabilities files and allows you to select which of the 
+        destroy() {
+            // TODO
+        }
+
+
+        /**
+         * This function gets called for each of the objects defined in the capabilities files and allows you to select which of the
          * objects and properties you want to expose to the users in the property pane.
-         * 
+         *
          */
-        public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] | VisualObjectInstanceEnumerationObject {
-            return VisualSettings.enumerateObjectInstances(this.settings || VisualSettings.getDefault(), options);
+        enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] | VisualObjectInstanceEnumerationObject {
+            return LineUpVisualSettings.enumerateObjectInstances(this.settings || LineUpVisualSettings.getDefault(), options);
         }
     }
 }

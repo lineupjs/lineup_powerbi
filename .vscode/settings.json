@@ -1,5 +1,5 @@
 {
-  "editor.tabSize": 4,
+  "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "files.eol": "\n",
   "files.watcherExclude": {
@@ -33,5 +33,6 @@
       ],
       "url": "./.api/v1.10.0/schema.dependencies.json"
     }
-  ]
+  ],
+  "files.trimTrailingWhitespace": true
 }

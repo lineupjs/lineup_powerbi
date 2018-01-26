@@ -3,7 +3,7 @@
     "name": "lineup_powerbi",
     "displayName": "lineup_powerbi",
     "guid": "lineuppowerbiE314DAA0C5D64CB288D237BF5C4CA3CD",
-    "visualClassName": "Visual",
+    "visualClassName": "LineUpVisual",
     "version": "1.0.0",
     "description": "",
     "supportUrl": "",
@@ -11,16 +11,17 @@
   },
   "apiVersion": "1.10.0",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Samuel Gratzl",
+    "email": "samuel-gratzl@gmx.at"
   },
   "assets": {
     "icon": "assets/icon.png"
   },
   "externalJS": [
-    "node_modules/powerbi-visuals-utils-dataviewutils/lib/index.js"
+    "node_modules/powerbi-visuals-utils-dataviewutils/lib/index.js",
+    "node_modules/lineupjs/build/LineUpJS.min.js"
   ],
-  "style": "style/visual.less",
+  "style": "style/style.less",
   "capabilities": "capabilities.json",
   "dependencies": "dependencies.json",
   "stringResources": []
