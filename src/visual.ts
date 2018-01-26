@@ -1,3 +1,5 @@
+import {LineUp, LocalDataProvider} from 'lineupjs';
+
 /*
  *  Power BI Visual CLI
  *

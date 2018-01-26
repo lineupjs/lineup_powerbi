@@ -6,8 +6,8 @@
     "visualClassName": "LineUpVisual",
     "version": "1.0.0",
     "description": "",
-    "supportUrl": "",
-    "gitHubUrl": ""
+    "supportUrl": "https://github.com/sgratzl/lineup_powerbi/issues",
+    "gitHubUrl": "https://github.com/sgratzl/lineup_powerbi"
   },
   "apiVersion": "1.10.0",
   "author": {

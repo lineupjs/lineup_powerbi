@@ -1,10 +1,30 @@
 {
   "name": "lineup_powerbi",
+  "description": "LineUp is an interactive technique designed to create, visualize and explore rankings of items based on a set of heterogeneous attributes.",
+  "private": true,
+  "version": "1.0.0",
+  "author": {
+    "name": "Samuel Gratzl",
+    "email": "samuel-gratzl@gmx.at"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sgratzl/lineup_powerbi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sgratzl/lineup_powerbi.git"
+  },
+  "homepage": "https://github.com/sgratzl/lineup_powerbi",
+  "scripts": {
+    "start": "pbiviz start"
+  },
   "dependencies": {
     "lineupjs": "^3.0.0-beta.1",
     "powerbi-visuals-utils-dataviewutils": "1.2.0"
   },
   "devDependencies": {
+    "powerbi-visuals-tools": "github:mattdot/powerbi-visuals-tools",
     "tslint": "^5.9.1",
     "typescript": "^2.6.2"
   }
