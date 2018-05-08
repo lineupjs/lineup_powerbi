@@ -20,14 +20,14 @@
     "start": "pbiviz start"
   },
   "dependencies": {
-    "lineupjs": "^3.0.0-beta.1",
-    "powerbi-visuals-utils-dataviewutils": "^1.4.0"
+    "lineupjs": "^3.0.0-beta.8",
+    "powerbi-visuals-utils-dataviewutils": "^1.4.1"
   },
   "devDependencies": {
-    "powerbi-visuals-tools": "github:mattdot/powerbi-visuals-tools",
+    "powerbi-visuals-tools": "^1.11.13",
     "tslint": "^5.9.1",
     "tslint-consistent-codestyle": "^1.11.1",
     "tslint-eslint-rules": "^5.1.0",
-    "typescript": "^2.7.2"
+    "typescript": "^2.8.3"
   }
 }
