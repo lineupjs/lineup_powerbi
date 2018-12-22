@@ -6,13 +6,13 @@
     "visualClassName": "LineUpVisual",
     "version": "1.0.0",
     "description": "LineUp is an interactive technique designed to create, visualize and explore rankings of items based on a set of heterogeneous attributes.",
-    "supportUrl": "https://github.com/datavisyn/lineup_powerbi/issues",
-    "gitHubUrl": "https://github.com/datavisyn/lineup_powerbi"
+    "supportUrl": "https://github.com/lineupjs/lineup_powerbi/issues",
+    "gitHubUrl": "https://github.com/lineupjs/lineup_powerbi"
   },
   "apiVersion": "1.10.0",
   "author": {
     "name": "Samuel Gratzl",
-    "email": "samuel-gratzl@gmx.at"
+    "email": "sam@sgratzl.com"
   },
   "assets": {
     "icon": "assets/icon.png"

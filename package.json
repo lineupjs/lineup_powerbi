@@ -5,17 +5,17 @@
   "version": "1.0.0",
   "author": {
     "name": "Samuel Gratzl",
-    "email": "samuel-gratzl@gmx.at"
+    "email": "sam@sgratzl.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/datavisyn/lineup_powerbi/issues"
+    "url": "https://github.com/lineupjs/lineup_powerbi/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/datavisyn/lineup_powerbi.git"
+    "url": "https://github.com/lineupjs/lineup_powerbi.git"
   },
-  "homepage": "https://github.com/datavisyn/lineup_powerbi",
+  "homepage": "https://github.com/lineupjs/lineup_powerbi",
   "scripts": {
     "start": "pbiviz start"
   },
